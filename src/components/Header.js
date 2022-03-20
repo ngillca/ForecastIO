@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
+import { motion } from 'framer-motion';
+import styles from './Header.module.css'
 
-export default function Header() {
+export default function Header({ text }) {
   return (
     <>
-    <h1>ForecastIO</h1>
+      <motion.h1 className={styles.content}>{text}</motion.h1>
     </>
-  )
+  );
 }
