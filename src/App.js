@@ -3,7 +3,7 @@ import React, { Suspense, useState, useCallback, useEffect } from "react";
 import "./App.css";
 
 import Header from "./components/Header";
-
+import Forecast from "./components/Forecast";
 import { motion, AnimatePresence } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -18,7 +18,13 @@ function App() {
   const [showHeader, setShowHeader] = useState(false);
   setTimeout(() => {
     setShowHeader(true);
-  }, 9600);
+  }, 8000);
+
+  // forecast data load-in
+  const [showForecast, setShowForecast] = useState(false);
+  setTimeout(() => {
+    setShowForecast(true);
+  }, 10000);
 
   // assing length for intro
   const [isLoadingP, setIsLoadingP] = useState(1.4);
@@ -31,21 +37,26 @@ function App() {
   setTimeout(() => {
     setIsLoadingP(0);
     setShowP(false);
-  }, 9500);
+  }, 7500);
 
   // forecast loading load-in
   const [showLoading, setShowLoading] = useState(true);
   setTimeout(() => {
     setIsLoadingFetch(0);
     setShowLoading(false);
-  }, 9500);
+  }, 7500);
 
   return (
     <div className="App">
       <AnimatePresence>
         {showHeader && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <motion.div initial={{ opacity: 0.3 }} animate={{ opacity: 1 }}>
             <Header text={"ForecastIO"} />
+            {showForecast && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <Forecast />
+          </motion.div>
+        )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -68,6 +79,10 @@ function App() {
           </motion.div>
         </AnimatePresence>
       )}
+
+
+
+
 
       {showP && (
         <AnimatePresence>

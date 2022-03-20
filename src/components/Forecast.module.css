@@ -1,0 +1,14 @@
+.container {
+  color: rgb(161, 238, 6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px;
+  border-radius: 20px;
+  background-color: rgba(218, 255, 200, 0.1);
+  margin: 15% 10% 0% 10%;
+}
+
+.container-border {
+}
