@@ -11,7 +11,7 @@ export default function Box() {
   return (
     <>
       <mesh rotation={[90, 0, 20]}>
-        <boxBufferGeometry attach='geometry' args={[1, 1, 1]} />
+        <boxBufferGeometry attach='geometry' args={[1.5, 1.5, 1.5]} />
         {/* <meshStandardMaterial map={colorMap} /> */}
         <meshNormalMaterial attach='material' />
       </mesh>

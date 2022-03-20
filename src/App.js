@@ -18,33 +18,27 @@ function App() {
   const [showHeader, setShowHeader] = useState(false);
   setTimeout(() => {
     setShowHeader(true);
-  }, 8000);
+  }, 9600);
+
+  // assing length for intro
+  const [isLoadingP, setIsLoadingP] = useState(1.4);
+
+  // assing length for intro
+  const [isLoadingFetch, setIsLoadingFetch] = useState(2.8);
 
   // forecast paragraph load-in
   const [showP, setShowP] = useState(true);
   setTimeout(() => {
+    setIsLoadingP(0);
     setShowP(false);
-  }, 8000);
+  }, 9500);
 
   // forecast loading load-in
   const [showLoading, setShowLoading] = useState(true);
   setTimeout(() => {
+    setIsLoadingFetch(0);
     setShowLoading(false);
-  }, 8000);
-
-  // const [isTime, setTime] = useState(true);
-  // const [newName, setnewName] = useState("Welcome to your daily Forecast ");
-
-  // const shuffle = useCallback(() => {
-  //   const index = Math.floor(Math.random() * names.length);
-  //   setTime(false);
-  //   setnewName(names[1]);
-  // }, []);
-
-  // useEffect(() => {
-  //   const intervalID = setInterval(shuffle, 4000);
-  //   return () => clearInterval(intervalID);
-  // }, [shuffle]);
+  }, 9500);
 
   return (
     <div className="App">
@@ -56,88 +50,71 @@ function App() {
         )}
       </AnimatePresence>
 
+      {showHeader && (
+        <AnimatePresence>
+          <motion.div
+            initial={{ y: "-210vh" }}
+            animate={{ y: 0 }}
+            transition={{ type: "spring", delay: 0.1, stiffness: 22 }}
+          >
+            <Canvas style={{ height: "500px" }}>
+              <OrbitControls enableZoom={false} />
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[-2, 5, 2]} intensity={2} />
+              <Suspense fallback={null}>
+                <Box />
+              </Suspense>
+            </Canvas>
+          </motion.div>
+        </AnimatePresence>
+      )}
 
-
-      <AnimatePresence>
-        {showP && (
-          <motion.div className='bodytext'
+      {showP && (
+        <AnimatePresence>
+          <motion.div
+            className="bodytext"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
+            transition={{ delay: `${isLoadingP}` }}
+            exit={{ opacity: 0 }}
           >
-            <motion.h1>Welcome to your Forecast</motion.h1>
+            <motion.h1> Welcome to your daily Forecast</motion.h1>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      )}
 
-      
-      <AnimatePresence>
-        {showLoading && (
-          <motion.div className='bodytext'
+      {showLoading && (
+        <AnimatePresence>
+          <motion.div
+            className="bodytext"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.3 }}
+            transition={{ delay: `${isLoadingFetch}` }}
+            exit={{ opacity: 0 }}
           >
-            <motion.h1>Loading forecast</motion.h1>
+            <motion.h3>fetching forecast</motion.h3>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      )}
 
-      {/* <Canvas style={{ height: '600px' }} > 
-        <OrbitControls enableZoom={false} />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[-2, 5, 2]} intensity={1} />
-        <Suspense fallback={null} >
-          <Box />
-        </Suspense> */}
-      {/* Need to fix positioning because theyre stacking on eachother */}
-      {/* <Suspense fallback={null} >
-          <AnimatedSphere />
-        </Suspense> */}
-
-      {/* </Canvas> */}
-
-      {/* <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="bodytext"
-      > */}
-        {/* transition text to fetching forecast after 3s */}
-        {/* <motion.h1>{isTime ? newName : newName}</motion.h1>
-      </motion.div> */}
-      {/* <motion.div
-        initial={{ opacity: 0}}
-        animate={{ opacity: 1}}
-        transition={{ delay: 4 }}
-      >
-        <h1>fetching forecast</h1>
-      </motion.div> */}
-
-      <motion.div 
-        initial={{ y: "-210vh" }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", delay: 0.9, stiffness: 22 }}
-      >
-        <Canvas style={{ height: "500px" }}>
-          <OrbitControls enableZoom={false} />
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[-2, 5, 2]} intensity={2} />
-          <Suspense fallback={null}>
-            <AnimatedSphere />
-          </Suspense>
-        </Canvas>
-      </motion.div>
-
-      {/* <Canvas style={{ height: '600px' }} > 
-        <OrbitControls enableZoom={false} />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[-2, 5, 2]} intensity={1} />
-        <Suspense fallback={null} >
-          <AnimatedSphere />
-        </Suspense>
-       
-      </Canvas> */}
+      {showLoading && (
+        <AnimatePresence>
+          <motion.div
+            initial={{ y: "-210vh" }}
+            animate={{ y: 0 }}
+            transition={{ type: "spring", delay: 0, stiffness: 22 }}
+          >
+            <Canvas style={{ height: "500px" }}>
+              <OrbitControls enableZoom={false} />
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[-2, 5, 2]} intensity={2} />
+              <Suspense fallback={null}>
+                <AnimatedSphere />
+              </Suspense>
+            </Canvas>
+          </motion.div>
+        </AnimatePresence>
+      )}
     </div>
   );
 }
