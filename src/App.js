@@ -53,10 +53,10 @@ function App() {
           <motion.div initial={{ opacity: 0.3 }} animate={{ opacity: 1 }}>
             <Header text={"ForecastIO"} />
             {showForecast && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <Forecast />
-          </motion.div>
-        )}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <Forecast />
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -79,13 +79,8 @@ function App() {
           </motion.div>
         </AnimatePresence>
       )}
-
-
-
-
-
-      {showP && (
-        <AnimatePresence>
+      <AnimatePresence>
+        {showP && (
           <motion.div
             className="bodytext"
             initial={{ opacity: 0 }}
@@ -95,11 +90,10 @@ function App() {
           >
             <motion.h1> Welcome to your daily Forecast</motion.h1>
           </motion.div>
-        </AnimatePresence>
-      )}
-
-      {showLoading && (
-        <AnimatePresence>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showLoading && (
           <motion.div
             className="bodytext"
             initial={{ opacity: 0 }}
@@ -109,15 +103,15 @@ function App() {
           >
             <motion.h3>fetching forecast</motion.h3>
           </motion.div>
-        </AnimatePresence>
-      )}
-
-      {showLoading && (
-        <AnimatePresence>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showLoading && (
           <motion.div
             initial={{ y: "-210vh" }}
             animate={{ y: 0 }}
             transition={{ type: "spring", delay: 0, stiffness: 22 }}
+            exit={{ opacity: 0 }}
           >
             <Canvas style={{ height: "500px" }}>
               <OrbitControls enableZoom={false} />
@@ -128,8 +122,8 @@ function App() {
               </Suspense>
             </Canvas>
           </motion.div>
-        </AnimatePresence>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 }
