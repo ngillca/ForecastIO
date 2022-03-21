@@ -101,7 +101,7 @@ function App() {
             transition={{ delay: `${isLoadingFetch}` }}
             exit={{ opacity: 0 }}
           >
-            <motion.h3>fetching forecast</motion.h3>
+            <motion.h3>fetching forecast . . .</motion.h3>
           </motion.div>
         )}
       </AnimatePresence>
